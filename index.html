@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fancy Italian Restaurant</title>
+<style>
+  body {
+    background: linear-gradient(to right, #ffafd5, #ffc3a0);
+    font-family: 'Arial Black', Gadget, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+  }
+
+  h1 {
+    color: #fff;
+    background: #ff8c8c;
+    padding: 10px;
+  }
+
+  .menu-item {
+    text-align: left;
+    margin: 10px;
+    padding: 5px;
+    background: #fff;
+    border-radius: 5px;
+  }
+
+  button {
+    background: #ff8c8c;
+    color: #fff;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background: #ffafaf;
+  }
+
+  .cart {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background: #fff;
+  }
+</style>
+</head>
+<body>
+<h1>Fancy Italian Restaurant</h1>
+
+<div>
+  <input type="text" id="search" placeholder="Search menu items...">
+  <button onclick="searchMenu()">Search</button>
+</div>
+
+<div id="menu">
+  <div class="menu-item">
+    Spaghetti Aglio e Olio - $12
+    <button onclick="addToCart('Spaghetti Aglio e Olio', 12)">Add to Cart</button>
+  </div>
+  <div class="menu-item">
+    Margherita Pizza - $10
+    <button onclick="addToCart('Margherita Pizza', 10)">Add to Cart</button>
+  </div>
+  <!-- Add more menu items here -->
+</div>
+
+<div class="cart">
+  <span>Cart Total: $<span id="cart-total">0</span></span>
+  <button onclick="checkout()">Checkout</button>
+</div>
+
+<script>
+  let cartTotal = 0;
+
+  function addToCart(item, price) {
+    cartTotal += price;
+    document.getElementById('cart-total').innerText = cartTotal;
+  }
+
+  function searchMenu() {
+    const search = document.getElementById('search').value.toLowerCase();
+    const items = document.querySelectorAll('.menu-item');
+    
+    items.forEach(item => {
+      if (item.innerText.toLowerCase().includes(search)) {
+        item.style.display = 'block';
+      } else {
+        item.style.display = 'none';
+      }
+    });
+  }
+
+  function checkout() {
+    alert('Thank you for your order! Your total is $' + cartTotal);
+    cartTotal = 0;
+    document.getElementById('cart-total').innerText = cartTotal;
+  }
+</script>
+</body>
+</html>
